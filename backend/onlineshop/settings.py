@@ -38,15 +38,17 @@ SECRET_KEY = 'django-insecure-3gx(pww65x%ulj=0n)et2os3v3ns2zykq@wm(-9t4v)2-&p$vx
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = [
+ALLOWED_HOSTS = ['*',] 
+CORS_ALLOWED_ORIGINS =[
     'http://localhost:3000',
     'http://localhost',
     'http://127.0.0.1:3000',
     'http://127.0.0.1',
-    'http://0.0.0.0',
+    'http://0.0.0.0'
+   
+    
+    
 ]
-
 
 # Application definition
 
@@ -71,10 +73,11 @@ INSTALLED_APPS = [
     'taggit',
     'drf_fsm',
     'django_filters',
+    'phonenumber_field',
     # 'ckeditor',
     # 'ckeditor_uploader',
     'tinymce',
-    'celery_app',
+    # 'celery_app',
     'django_prometheus',
     'product',
     'profileuser',
