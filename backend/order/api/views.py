@@ -14,8 +14,9 @@ from rest_framework.exceptions import ValidationError
 class OrderViewSet(viewsets.ModelViewSet):
     
     queryset = Order.objects.all()
-    serializer_class =OrderSerializer
+    serializer_class =OrderWithRelatedsSerializer
     my_tags = ["Order"]
+    
     
 class OrderItemViewSet(viewsets.ModelViewSet):
     
