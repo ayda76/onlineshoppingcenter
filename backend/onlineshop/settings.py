@@ -77,6 +77,7 @@ INSTALLED_APPS = [
     # 'ckeditor',
     # 'ckeditor_uploader',
     'tinymce',
+    'silk',
     # 'celery_app',
     'django_prometheus',
     'product',
@@ -95,6 +96,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_prometheus.middleware.PrometheusBeforeMiddleware',
     'django_prometheus.middleware.PrometheusAfterMiddleware',
+    'silk.middleware.SilkyMiddleware',
 ]
 
 ROOT_URLCONF = 'onlineshop.urls'
@@ -110,6 +112,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
