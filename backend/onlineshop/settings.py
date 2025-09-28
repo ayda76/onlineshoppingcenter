@@ -24,7 +24,9 @@ REST_FRAMEWORK = {
     'rest_framework.authentication.SessionAuthentication',
     'rest_framework_simplejwt.authentication.JWTAuthentication',
 ),
- 'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']}
+ 'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+ 
+ }
 SIMPLE_JWT = {
 'AUTH_HEADER_TYPES': ('JWT',),
 'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
@@ -72,12 +74,13 @@ INSTALLED_APPS = [
     'corsheaders',
     'taggit',
     'drf_fsm',
-    'django_filters',
+
     'phonenumber_field',
     # 'ckeditor',
     # 'ckeditor_uploader',
     'tinymce',
     'silk',
+    'django_filters',
     # 'celery_app',
     'django_prometheus',
     'product',
