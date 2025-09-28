@@ -4,11 +4,11 @@ from product.models import *
 from product.api.serializers import ProductSerializer
 
 class OrderItemSerializer(serializers.ModelSerializer):
-    product_name=serializers.CharField(source='product.name')
-    profile_lastname=serializers.CharField(source='order.profile.lastname')
+    product_name=serializers.ReadOnlyField(source='product.name')
+    profile_lastname=serializers.ReadOnlyField(source='order.profile.lastname')
     class Meta:
         model=OrderItem
-        fields=['product_name','profile_lastname','order','quantity']
+        fields="__all__"
 
 class OrderSerializer(serializers.ModelSerializer):
     
@@ -17,9 +17,8 @@ class OrderSerializer(serializers.ModelSerializer):
         fields ='__all__'
         
 class OrderWithRelatedsSerializer(serializers.ModelSerializer):
-    orderItemsrelated=OrderItemSerializer(required=False)
+    orderItemsrelated=OrderItemSerializer(many=True,required=False)
    
-    
     class Meta:
         model=Order
         fields='__all__'

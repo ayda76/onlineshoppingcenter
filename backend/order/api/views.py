@@ -13,13 +13,13 @@ from rest_framework.exceptions import ValidationError
 
 class OrderViewSet(viewsets.ModelViewSet):
     
-    queryset = Order.objects.prefetch_related('orderItemsrelated__product').all()
+    queryset = Order.objects.select_related('profile').prefetch_related('orderItemsrelated__product').all()
     serializer_class =OrderWithRelatedsSerializer
     my_tags = ["Order"]
     
     
 class OrderItemViewSet(viewsets.ModelViewSet):
     
-    queryset = OrderItem.objects.all()
+    queryset = OrderItem.objects.select_related('product','order').all()
     serializer_class =OrderItemSerializer
     my_tags = ["Order"]
