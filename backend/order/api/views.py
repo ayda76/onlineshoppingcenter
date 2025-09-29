@@ -10,11 +10,12 @@ from rest_framework.generics import ListAPIView , CreateAPIView
 from order.models import *
 from .serializers import *
 from rest_framework.exceptions import ValidationError
-
+from rest_framework.pagination import LimitOffsetPagination
 class OrderViewSet(viewsets.ModelViewSet):
     
     queryset = Order.objects.select_related('profile').prefetch_related('orderItemsrelated__product').all()
     serializer_class =OrderWithRelatedsSerializer
+    pagination_class=LimitOffsetPagination
     my_tags = ["Order"]
     
     
@@ -22,4 +23,5 @@ class OrderItemViewSet(viewsets.ModelViewSet):
     
     queryset = OrderItem.objects.select_related('product','order').all()
     serializer_class =OrderItemSerializer
+    
     my_tags = ["Order"]
