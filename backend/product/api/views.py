@@ -15,8 +15,9 @@ from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
 from rest_framework.permissions import BasePermission, IsAuthenticated
-
-    
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie, vary_on_headers
 class ProductViewSet(viewsets.ModelViewSet):
     
     queryset = Product.objects.all()
@@ -40,3 +41,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     
     
     my_tags = ["Product"]
+    
+    @method_decorator(cache_page(60 * 15, key_prefix='product_list'))
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)

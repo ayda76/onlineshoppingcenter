@@ -17,6 +17,10 @@ from rest_framework.decorators import action
 from rest_framework.permissions import BasePermission, IsAuthenticated
 from profileuser.models import Profile
 
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie, vary_on_headers
+
 class OrderViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = Order.objects.select_related('profile').prefetch_related('orderItemsrelated__product').all()
@@ -26,12 +30,22 @@ class OrderViewSet(viewsets.ModelViewSet):
     filterset_class=OrderFilter
     filter_backends=[DjangoFilterBackend]
     my_tags = ["Order"]
+    
+   
+    
+
     def get_queryset(self):
         qs=super().get_queryset()
         if not self.request.user.is_staff:
             profileSelected=Profile.get_user_jwt(self,self.request)
             qs=qs.filter(profile=profileSelected)
         return qs    
+    
+    @method_decorator(cache_page(60 * 15, key_prefix='product_list'))
+    @method_decorator(vary_on_headers("Authorization"))
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+    
     def perform_create(self, serializer):
         profileSelected=Profile.get_user_jwt(self,self.request)
         return serializer.save(profile=profileSelected)
