@@ -183,6 +183,12 @@ USE_I18N = True
 
 USE_TZ = True
 
+DEFAULT_FROM_EMAIL = "no-reply@example.com"
+EMAIL_HOST = "smtp.example.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "user@example.com"
+EMAIL_HOST_PASSWORD = "secret"
+EMAIL_USE_TLS = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -225,3 +231,7 @@ CACHES = {
         }
     }
 }
+
+CELERY_BROKER_URL="redis://127.0.0.1:6379/1"
+CELERY_RESULT_BACKEND="redis://127.0.0.1:6379/1"
+EMAIL_BACKEND="django.core.mail.backends.console.EmailBackend"
