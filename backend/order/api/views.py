@@ -20,7 +20,10 @@ from profileuser.models import Profile
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie, vary_on_headers
+from order.tasks import send_confirmation_email_order
 
+### for running celery: celery -A onlineshop worker --loglevel=INFO 
+### run redis: docker  run --name redis -p 6379:6379 -d redis
 class OrderViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = Order.objects.select_related('profile').prefetch_related('orderItemsrelated__product').all()
@@ -41,14 +44,17 @@ class OrderViewSet(viewsets.ModelViewSet):
             qs=qs.filter(profile=profileSelected)
         return qs    
     
-    @method_decorator(cache_page(60 * 15, key_prefix='product_list'))
+    @method_decorator(cache_page(60 * 15, key_prefix='order_list'))
     @method_decorator(vary_on_headers("Authorization"))
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
     
     def perform_create(self, serializer):
         profileSelected=Profile.get_user_jwt(self,self.request)
-        return serializer.save(profile=profileSelected)
+        order=serializer.save(profile=profileSelected)
+        send_confirmation_email_order.delay(order.order_id,self.request.user.email)
+ 
+    
     
     def get_serializer_class(self, *args, **kwargs):
         if self.request.method == 'POST'or'PUT'or'PATCH':
