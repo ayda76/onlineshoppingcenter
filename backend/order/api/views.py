@@ -24,6 +24,9 @@ from order.tasks import send_confirmation_email_order
 
 ### for running celery: celery -A onlineshop worker --loglevel=INFO 
 ### run redis: docker  run --name redis -p 6379:6379 -d redis
+###docker start redis
+##celery -A onlineshop worker -l info
+###celery -A onlineshop worker -l info -P solo
 class OrderViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = Order.objects.select_related('profile').prefetch_related('orderItemsrelated__product').all()
@@ -33,8 +36,6 @@ class OrderViewSet(viewsets.ModelViewSet):
     filterset_class=OrderFilter
     filter_backends=[DjangoFilterBackend]
     my_tags = ["Order"]
-    
-   
     
 
     def get_queryset(self):
