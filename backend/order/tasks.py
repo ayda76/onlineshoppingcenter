@@ -6,4 +6,6 @@ from django.conf import settings
 def send_confirmation_email_order(order_id,user_email):
     subject='order confirmation'
     text=f'your order({order_id}) is placed in the system'
+    print(f"[DEBUG] Sending email for order {order_id} to {user_email}")
+    
     return send_mail(subject,text,settings.DEFAULT_FROM_EMAIL,[user_email])
