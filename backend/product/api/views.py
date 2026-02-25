@@ -24,11 +24,11 @@ class ProductViewSet(viewsets.ModelViewSet):
     serializer_class =ProductSerializer
     filterset_class=ProductFilter
     #in this way we will have the default pagination setting 
-    pagination_class=LimitOffsetPagination
+    # pagination_class=LimitOffsetPagination
     
     #this way is custom pagination
-    # pagination_class=PageNumberPagination
-    # pagination_class.page_size=2
+    pagination_class=PageNumberPagination
+    pagination_class.page_size=2
     #note that we do not show 2 pages we show 2 products in a page
     # pagination_class.page_query_param='pagenum'
     filter_backends=[DjangoFilterBackend,
@@ -42,6 +42,6 @@ class ProductViewSet(viewsets.ModelViewSet):
     
     my_tags = ["Product"]
     
-    @method_decorator(cache_page(60 * 15, key_prefix='product_list'))
+    # @method_decorator(cache_page(60 * 15, key_prefix='product_list'))
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)

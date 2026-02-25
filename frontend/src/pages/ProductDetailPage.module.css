@@ -1,0 +1,53 @@
+.back {
+  display:inline-block; color:#666; font-size:14px; font-weight:700;
+  margin-bottom:28px; text-decoration:none;
+  padding:8px 14px; border:1.5px solid #ddd; border-radius:8px;
+}
+.back:hover { background:#f5f5f5; }
+
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start; }
+
+.imgSide {}
+.imgWrap {
+  border-radius:24px; height:440px;
+  display:flex; align-items:center; justify-content:center; overflow:hidden;
+}
+.img         { width:100%; height:100%; object-fit:contain; padding:20px; }
+.placeholder { font-size:120px; }
+
+.infoSide {}
+.name    { font-size:32px; font-weight:900; margin-bottom:12px; line-height:1.15; }
+.price   { font-size:40px; font-weight:900; color:#cc0000; margin-bottom:16px; }
+
+.stockRow { margin-bottom:20px; }
+.inStock  { color:#2e7d32; font-size:14px; font-weight:700; }
+.outStock { color:#cc0000; font-size:14px; font-weight:700; }
+
+.desc    { font-size:15px; color:#555; line-height:1.75; margin-bottom:20px; }
+.divider { border:none; border-top:1px solid #eee; margin:20px 0; }
+
+.qtyRow     { display:flex; align-items:center; gap:18px; margin-bottom:20px; }
+.qtyLabel   { font-size:14px; font-weight:700; color:#444; }
+.qtyControls{ display:flex; align-items:center; gap:10px; }
+.qtyBtn     {
+  width:36px; height:36px; border-radius:8px; background:#f0f0f0; border:none;
+  font-size:20px; font-weight:700; cursor:pointer; line-height:1;
+  display:flex; align-items:center; justify-content:center;
+}
+.qtyBtn:hover { background:#e0e0e0; }
+.qtyVal { font-size:18px; font-weight:800; width:32px; text-align:center; }
+
+.addBtn  { margin-bottom:12px; font-size:16px !important; }
+.viewCart{ display:block; text-align:center; margin-bottom:28px; }
+
+.meta    { background:#f8f8f8; border-radius:12px; padding:18px; }
+.metaRow { display:flex; justify-content:space-between; font-size:13px; color:#666; padding:6px 0; border-bottom:1px solid #eee; }
+.metaRow:last-child { border-bottom:none; }
+.metaRow span:last-child { font-weight:700; color:#1a1a1a; }
+
+@media (max-width:768px) {
+  .grid { grid-template-columns:1fr; gap:24px; }
+  .imgWrap { height:280px; }
+  .name  { font-size:24px; }
+  .price { font-size:30px; }
+}

@@ -1,0 +1,16 @@
+.page {
+  min-height: 70vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 48px 20px;
+}
+.card {
+  background: #fff; border-radius: 22px;
+  padding: 44px; width: 100%; max-width: 420px;
+  box-shadow: 0 8px 36px rgba(0,0,0,0.12);
+}
+.logo   { font-size:52px; text-align:center; margin-bottom:8px; }
+.title  { font-size:28px; font-weight:900; text-align:center; margin-bottom:4px; }
+.sub    { color:#888; text-align:center; font-size:14px; margin-bottom:28px; }
+.group  { margin-bottom:16px; }
+.submit { margin-top:8px; }
+.switch { text-align:center; margin-top:20px; font-size:14px; color:#666; }
