@@ -53,7 +53,7 @@ class OrderViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         profileSelected=Profile.get_user_jwt(self,self.request)
         order=serializer.save(profile=profileSelected)
-        send_confirmation_email_order.delay(order.order_id,self.request.user.email)
+        # send_confirmation_email_order.delay(order.order_id,self.request.user.email)
  
     
     

@@ -1,0 +1,76 @@
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, #cc0000 0%, #7b0000 100%);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 72px 60px; gap: 40px; overflow: hidden; position: relative;
+  min-height: 360px;
+}
+.heroContent { color:#fff; max-width:480px; position:relative; z-index:1; }
+.heroEyebrow { font-size:12px; font-weight:800; letter-spacing:2.5px; text-transform:uppercase; opacity:0.75; margin-bottom:12px; }
+.heroTitle   { font-size:54px; font-weight:900; line-height:1.08; margin-bottom:16px; }
+.heroSub     { font-size:17px; opacity:0.85; margin-bottom:32px; }
+.heroCTA          { background:#fff !important; color:#cc0000 !important; }
+.heroCTASecondary { background:transparent !important; color:#fff !important; border:2px solid rgba(255,255,255,0.6) !important; }
+
+.heroFloats { display:flex; flex-wrap:wrap; gap:16px; justify-content:flex-end; max-width:300px; }
+.floatBubble {
+  width:96px; height:96px; border-radius:22px;
+  background:rgba(255,255,255,0.14); backdrop-filter:blur(6px);
+  display:flex; align-items:center; justify-content:center;
+  font-size:42px; animation:float 3.5s ease-in-out infinite;
+}
+
+/* Section */
+.section       { margin-bottom:52px; }
+.sectionHead   { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+.sectionTitle  { font-size:24px; font-weight:900; margin-bottom:0; }
+.seeAll        { color:#cc0000; font-size:14px; font-weight:800; border:1.5px solid #cc0000; padding:6px 16px; border-radius:8px; text-decoration:none; }
+.seeAll:hover  { background:#fff0f0; }
+
+/* Category grid */
+.catGrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:14px; margin-bottom:0; }
+.catCard {
+  border-radius:16px; padding:24px 16px; text-align:center;
+  cursor:pointer; transition:transform 0.18s, box-shadow 0.18s;
+}
+.catCard:hover { transform:translateY(-4px); box-shadow:0 8px 24px rgba(0,0,0,0.18); }
+.catIcon  { display:block; font-size:36px; margin-bottom:10px; }
+.catLabel { color:#fff; font-weight:800; font-size:14px; }
+
+/* Deals banner */
+.dealsBanner {
+  background:linear-gradient(135deg,#1a1a1a,#2d2d2d);
+  border-radius:20px; padding:36px 44px; margin-bottom:28px;
+  display:flex; align-items:center; justify-content:space-between; gap:20px;
+}
+.dealsTitle { color:#fff; font-size:30px; font-weight:900; margin-bottom:6px; }
+.dealsSub   { color:#aaa; font-size:15px; }
+.dealsBtn   { background:#cc0000 !important; color:#fff !important; flex-shrink:0; }
+
+/* CTA banner */
+.ctaBanner {
+  background: linear-gradient(135deg,#fff0f0,#ffe5e5);
+  border: 2px solid #ffcccc; border-radius:20px;
+  padding:36px 44px; margin-bottom:60px;
+  display:flex; align-items:center; justify-content:space-between; gap:20px;
+}
+.ctaText h3 { font-size:22px; font-weight:900; margin-bottom:6px; }
+.ctaText p  { color:#888; font-size:14px; }
+
+/* Login prompt */
+.loginPrompt {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 14px; padding: 60px 20px; text-align: center;
+  background: #fff; border-radius: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+.loginPrompt h3 { font-size: 22px; font-weight: 900; }
+.loginPrompt p  { color: #888; font-size: 15px; }
+
+@media (max-width:768px) {
+  .hero       { padding:40px 20px; flex-direction:column; }
+  .heroTitle  { font-size:36px; }
+  .heroFloats { display:none; }
+  .dealsBanner{ flex-direction:column; gap:16px; }
+  .ctaBanner  { flex-direction:column; }
+}

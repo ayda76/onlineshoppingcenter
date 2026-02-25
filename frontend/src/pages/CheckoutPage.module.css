@@ -1,0 +1,11 @@
+.layout   { display:grid; grid-template-columns:1fr 360px; gap:32px; align-items:start; }
+.section  { background:#fff; border-radius:16px; padding:24px; margin-bottom:18px; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+.secTitle { font-size:17px; font-weight:800; margin-bottom:14px; }
+.secNote  { font-size:14px; color:#555; line-height:1.6; }
+.lineItem { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #f0f0f0; }
+.lineItem:last-child { border-bottom:none; }
+.payNote  { display:flex; gap:14px; align-items:flex-start; background:#f8f8f8; border-radius:12px; padding:16px; }
+.placeBtn { margin-top:16px; }
+.backLink { display:block; text-align:center; margin-top:14px; color:#888; font-size:14px; font-weight:600; text-decoration:none; }
+.backLink:hover { color:#cc0000; }
+@media (max-width:900px) { .layout { grid-template-columns:1fr; } }

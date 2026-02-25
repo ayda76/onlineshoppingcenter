@@ -1,0 +1,64 @@
+.sidebar { width: 220px; flex-shrink: 0; }
+
+.title {
+  font-size: 18px; font-weight: 900; margin-bottom: 20px; color: #1a1a1a;
+}
+
+.section { margin-bottom: 24px; }
+
+.sectionLabel {
+  font-size: 11px; font-weight: 800; color: #999;
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;
+}
+
+.item {
+  display: block; width: 100%; text-align: left;
+  background: none; border: none; padding: 8px 12px;
+  border-radius: 8px; cursor: pointer; font-size: 13px;
+  color: #555; font-weight: 600; margin-bottom: 2px;
+  transition: background 0.12s;
+}
+.item:hover { background: #f5f5f5; color: #1a1a1a; }
+
+.itemActive {
+  display: block; width: 100%; text-align: left;
+  background: #fff0f0; border: none; padding: 8px 12px;
+  border-radius: 8px; cursor: pointer; font-size: 13px;
+  color: #cc0000; font-weight: 800; margin-bottom: 2px;
+}
+
+.priceInput {
+  flex: 1; border: 2px solid #e8e8e8; border-radius: 8px;
+  padding: 8px 10px; font-size: 13px; width: 0;
+  min-width: 0; outline: none; font-family: var(--font);
+}
+.priceInput:focus { border-color: #cc0000; }
+
+.applyBtn {
+  width: 100%; background: #cc0000; color: #fff; border: none;
+  border-radius: 8px; padding: 8px; font-size: 13px; font-weight: 700;
+  cursor: pointer; margin-bottom: 6px;
+}
+.applyBtn:hover { background: #a30000; }
+
+.clearBtn {
+  width: 100%; background: #f5f5f5; color: #666; border: none;
+  border-radius: 8px; padding: 7px; font-size: 12px; font-weight: 700;
+  cursor: pointer;
+}
+
+.clearAllBtn {
+  width: 100%; background: transparent; color: #cc0000;
+  border: 2px solid #cc0000; border-radius: 10px;
+  padding: 9px; font-size: 13px; font-weight: 800;
+  cursor: pointer; margin-top: 8px;
+  transition: all 0.15s;
+}
+.clearAllBtn:hover { background: #fff0f0; }
+
+@media (max-width: 900px) {
+  .sidebar { width: 100%; display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start; }
+  .section { min-width: 160px; margin-bottom: 0; }
+  .title { width: 100%; margin-bottom: 10px; }
+  .clearAllBtn { min-width: 160px; }
+}

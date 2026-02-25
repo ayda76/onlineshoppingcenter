@@ -16,13 +16,28 @@ class Profile(models.Model):
     email=models.EmailField(blank=True, null=True)
     def __str__(self) :
         return f"{self.firstname}{self.lastname}"
-    def get_user_jwt(self,request):
-        
-        token = get_authorization_header(request).decode('utf-8')
-        if token is None or token == "null" or token.strip() == "":
-            raise exceptions.AuthenticationFailed('Authorization Header or Token is missing on Request Headers')
-        
-        decoded = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
-        
-        username = decoded['user_id']
-        return Profile.objects.get(user__id=username)    
+    def get_user_jwt(self, request):
+        raw = get_authorization_header(request).decode('utf-8')
+        if not raw or raw.strip() == "":
+            raise exceptions.AuthenticationFailed('Authorization Header is missing')
+
+        # Header looks like "JWT eyJ..." — strip the prefix
+        parts = raw.split()
+        if len(parts) != 2:
+            raise exceptions.AuthenticationFailed('Invalid Authorization header format')
+
+        token = parts[1]  # just the JWT token, without "JWT " prefix
+
+        try:
+            decoded = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
+        except jwt.ExpiredSignatureError:
+            raise exceptions.AuthenticationFailed('Token has expired')
+        except jwt.DecodeError:
+            raise exceptions.AuthenticationFailed('Invalid token')
+
+        user_id = decoded.get('user_id')
+        if not user_id:
+            raise exceptions.AuthenticationFailed('Token missing user_id')
+        print(user_id)
+        profileselected=Profile.objects.get(user__id=user_id)
+        return profileselected
