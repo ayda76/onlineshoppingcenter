@@ -231,7 +231,32 @@ CELERY_BROKER_URL="redis://127.0.0.1:6379/1"
 CELERY_RESULT_BACKEND="redis://127.0.0.1:6379/1"
 # EMAIL_BACKEND="django.core.mail.backends.console.EmailBackend"
 # EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+import sys
+from django.core.cache.backends.locmem import LocMemCache
 
+# When running tests, disable Redis entirely
+if "test" in sys.argv:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "test-cache",
+        }
+    }
+    
+    # Patch LocMemCache with a no-op delete_pattern method
+    def _delete_pattern(self, pattern):
+        self.clear()
+
+    LocMemCache.delete_pattern = _delete_pattern
+
+    # Celery: run tasks locally and avoid Redis
+    CELERY_BROKER_URL = "memory://"
+    CELERY_RESULT_BACKEND = "cache"
+    CELERY_CACHE_BACKEND = "memory"
+    CELERY_TASK_ALWAYS_EAGER = True
+    CELERY_TASK_EAGER_PROPAGATES = True
+    
+    
 # DEFAULT_FROM_EMAIL = "no-reply@example.com"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
